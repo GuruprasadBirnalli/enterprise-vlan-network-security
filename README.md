@@ -59,3 +59,38 @@ This project demonstrates practical configuration of:
 4. Switch port security
 5. Extended ACLs
 6. Network segmentation and traffic isolation
+
+
+## Project Topology
+
+![Network Topology](topology.png)
+
+## Configuration & Verification
+
+### VLAN Configuration
+
+![VLAN Configuration](VLANs.png)
+
+### Trunk Configuration
+
+![Trunk Configuration](Trunks.png)
+
+### Router-on-a-Stick Configuration
+
+![Router Configuration](router.png)
+
+### ACL Configuration
+
+![ACL Configuration](ACL.png)
+
+### Port Security
+
+![Port Security](port%20security.png)
+
+### Successful Security Test
+
+![Successful Security Test](successful%20security%20test.png)
+
+### Blocked Security Test
+
+![Blocked Security Test](blocked%20security%20test.png)

@@ -1,69 +1,57 @@
 # Enterprise VLAN Network Security
 
-A Cisco Packet Tracer project demonstrating enterprise network segmentation using VLANs, inter-VLAN routing, trunking, port security, and ACL-based traffic control.
+A Cisco Packet Tracer project demonstrating VLAN segmentation, inter-VLAN routing, trunking, port security, and ACL-based departmental isolation.
 
-## Network Design
+## Project Overview
 
-The network contains three departmental VLANs:
+This network represents a small enterprise environment divided into three departments:
 
-| VLAN | Department | Network |
-|------|------------|---------|
-| 10 | HR | 192.168.10.0/24 |
-| 20 | Finance | 192.168.20.0/24 |
-| 30 | IT | 192.168.30.0/24 |
+- **HR — VLAN 10**
+- **Finance — VLAN 20**
+- **IT — VLAN 30**
 
-## Technologies Used
+The network uses **Router-on-a-Stick** for inter-VLAN routing. An extended ACL isolates the HR and Finance networks from each other while allowing other traffic.
 
-- Cisco Packet Tracer
-- VLANs
-- 802.1Q Trunking
-- Router-on-a-Stick
-- Inter-VLAN Routing
-- Port Security
-- Extended ACLs
+## Network Topology
 
-## Security Configuration
+![Network Topology](topology.png)
 
-Port security is configured on departmental access ports.
+## Key Features
 
-An extended ACL is used to isolate HR and Finance from each other while allowing other network traffic.
-
-### ACL Policy
-
-- HR → Finance: Denied
-- Finance → HR: Denied
-- Other traffic: Permitted
+- VLAN segmentation for HR, Finance, and IT
+- Router-on-a-Stick inter-VLAN routing
+- 802.1Q trunking
+- Switch port security
+- Extended ACL-based traffic filtering
+- Cisco IOS verification and troubleshooting
+- Connectivity and security testing
 
 ## IP Addressing
 
-- PC0: 192.168.10.3
-- PC1: 192.168.10.2
-- PC2: 192.168.20.2
-- PC3: 192.168.20.3
-- PC4: 192.168.30.3
-- PC5: 192.168.30.2
+| Department | VLAN | Network | Gateway |
+|------------|------|---------|---------|
+| HR | 10 | 192.168.10.0/24 | 192.168.10.1 |
+| Finance | 20 | 192.168.20.0/24 | 192.168.20.1 |
+| IT | 30 | 192.168.30.0/24 | 192.168.30.1 |
 
-## Project File
+## Security Design
 
-The Cisco Packet Tracer topology is available in:
+HR and Finance are isolated from each other using an extended ACL.
 
-`Enterprise_VLAN_Network_Security.pkt`
+```text
+10 deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+20 deny ip 192.168.20.0 0.0.0.255 192.168.10.0 0.0.0.255
+30 permit ip any any
+```
 
-## Learning Objectives
+## Security Policy
 
-This project demonstrates practical configuration of:
+- HR → Finance: Denied
+- Finance → HR: Denied
+- IT → HR: Allowed
+- IT → Finance: Allowed
 
-1. VLAN creation and assignment
-2. Access and trunk ports
-3. Router-on-a-Stick inter-VLAN routing
-4. Switch port security
-5. Extended ACLs
-6. Network segmentation and traffic isolation
-
-
-## Project Topology
-
-![Network Topology](topology.png)
+Port security was also configured on departmental access ports.
 
 ## Configuration & Verification
 
@@ -83,9 +71,9 @@ This project demonstrates practical configuration of:
 
 ![ACL Configuration](ACL.png)
 
-### Port Security
+### Port Security Configuration
 
-![Port Security](port%20security.png)
+![Port Security Configuration](port%20security.png)
 
 ### Successful Security Test
 
@@ -94,3 +82,44 @@ This project demonstrates practical configuration of:
 ### Blocked Security Test
 
 ![Blocked Security Test](blocked%20security%20test.png)
+
+## Verification Commands
+
+```text
+show vlan brief
+show interfaces trunk
+show ip interface brief
+show access-lists
+show ip interface GigabitEthernet0/0.10
+```
+
+## Project Files
+
+- `Enterprise_VLAN_Network_Security.pkt`
+- `configs/network-configuration.md`
+- `topology.png`
+- `VLANs.png`
+- `Trunks.png`
+- `router.png`
+- `ACL.png`
+- `port security.png`
+- `successful security test.png`
+- `blocked security test.png`
+
+## Tools Used
+
+- Cisco Packet Tracer
+- Cisco IOS CLI
+- GitHub
+
+## Learning Outcomes
+
+- VLAN segmentation
+- 802.1Q trunking
+- Router-on-a-Stick
+- Inter-VLAN routing
+- Extended ACLs
+- Switch port security
+- Network verification
+- Connectivity testing
+- Basic network troubleshooting
